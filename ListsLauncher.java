@@ -16,6 +16,7 @@ public class ListsLauncher {
 		tenIntArr.printHighest();
 		tenIntArr.addingTwoLowest();
 		tenIntArr.printEven();
+		tenIntArr.fourLists();
 	}
 }
 
@@ -72,6 +73,7 @@ class TenIntegerArray {
 	protected void printEven() {
 		int evenNums = 0;
 		
+		System.out.print("Even numbers: ");
 		for (int num : numList) {
 			if (num % 2 == 0) {
 				if (evenNums != 0) {
@@ -82,5 +84,66 @@ class TenIntegerArray {
 			}
 		}
 		System.out.println();
+	}
+	
+	// make four lists based on the divisibility of the numbers
+	protected void fourLists() {
+		int[] divTwoNums = new int[10];
+		int[] divThreeNums = new int[10];
+		int[] divFiveNums = new int[10];
+		int[] remainNums = new int[10];
+		int divTwoCounter = 0;
+		int divThreeCounter = 0;
+		int divFiveCounter = 0;
+		int remainCounter = 0;
+		
+		for (int num : numList) {
+			boolean isDividable = false;
+			if (num % 2 == 0) {
+				divTwoNums[divTwoCounter] = num;
+				divTwoCounter++;
+				isDividable = true;
+			}
+			if (num % 3 == 0) {
+				divThreeNums[divThreeCounter] = num;
+				divThreeCounter++;
+				isDividable = true;
+			}
+			if (num % 5 == 0) {
+				divFiveNums[divFiveCounter] = num;
+				divFiveCounter++;
+				isDividable = true;
+			}
+			if (!isDividable) {
+				remainNums[remainCounter] = num;
+				remainCounter++;
+			}
+		}
+		
+		printList(divTwoCounter, divTwoNums, 2);
+		printList(divThreeCounter, divThreeNums, 3);
+		printList(divFiveCounter, divFiveNums, 5);
+		printList(remainCounter, remainNums, 0);
+	}
+	
+	// printing method for fourLists
+	private void printList (int counter, int[] nums, int divBy) {
+		if (divBy != 0) {
+			System.out.print("Numbers dividable by " + divBy + ": ");
+		} else {
+			System.out.print("Remaining numbers: ");
+		}
+		
+		for (int i = 0; i < counter; i++) {
+			if (i != counter - 1) {
+				System.out.print(nums[i] + ", ");
+			} else {
+				System.out.println(nums[i]);
+			}
+		}
+		
+		if (counter == 0) {
+			System.out.println();
+		}
 	}
 }
