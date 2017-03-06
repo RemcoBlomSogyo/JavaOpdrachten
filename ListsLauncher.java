@@ -15,6 +15,7 @@ public class ListsLauncher {
 		tenIntArr.fill();
 		tenIntArr.printArray();
 		tenIntArr.printHighest();
+		tenIntArr.addingTwoLowest();
 	}
 }
 
@@ -53,5 +54,23 @@ class TenIntegerArray {
 			}
 		}
 		System.out.println("Highest number: " + highestNum);
+	}
+	
+	// adding the lowest two integers of the array and print
+	protected void addingTwoLowest() {
+		int firstLowest = 100;
+		int secondLowest = 100;
+		
+		for (int num : numList) {
+			if (num < firstLowest) {
+				secondLowest = firstLowest;
+				firstLowest = num;
+			} else if (num < secondLowest) {
+				secondLowest = num;
+			}
+		}
+		int totalLowest = firstLowest + secondLowest;
+		System.out.println("Adding two lowest numbers: " + firstLowest 
+			+ " + " + secondLowest + " = " + totalLowest);
 	}
 }
