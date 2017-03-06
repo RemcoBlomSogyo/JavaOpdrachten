@@ -24,13 +24,13 @@ class TenIntegerArray {
 	int[] numList = new int[10];
 	int listLength = numList.length;
 	
-	public void fill() {
+	protected void fill() {
 		for (int i = 0; i < listLength; i++) {
 			numList[i] = (int) (Math.random() * 101);
 		}
 	}
 	
-	public void print() {
+	protected void print() {
 		for (int i = 0; i < listLength; i++) {
 			System.out.print(numList[i]);
 			if (i != listLength - 1) {
