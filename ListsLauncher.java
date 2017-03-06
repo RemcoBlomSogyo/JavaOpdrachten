@@ -12,10 +12,10 @@ import java.lang.Math;
 public class ListsLauncher {
 	public static void main (String[] args) {
 		TenIntegerArray tenIntArr = new TenIntegerArray();
-		tenIntArr.fill();
-		tenIntArr.printArray();
+		tenIntArr.fillAndPrint();
 		tenIntArr.printHighest();
 		tenIntArr.addingTwoLowest();
+		tenIntArr.printEven();
 	}
 }
 
@@ -27,15 +27,9 @@ class TenIntegerArray {
 	int listLength = numList.length;
 	
 	// fill array with ten integers
-	protected void fill() {
+	protected void fillAndPrint() {
 		for (int i = 0; i < listLength; i++) {
 			numList[i] = (int) (Math.random() * 101);
-		}
-	}
-	
-	// print the array of ten integers
-	protected void printArray() {
-		for (int i = 0; i < listLength; i++) {
 			System.out.print(numList[i]);
 			if (i != listLength - 1) {
 				System.out.print(", ");
@@ -72,5 +66,21 @@ class TenIntegerArray {
 		int totalLowest = firstLowest + secondLowest;
 		System.out.println("Adding two lowest numbers: " + firstLowest 
 			+ " + " + secondLowest + " = " + totalLowest);
+	}
+	
+	// print all even numbers of array
+	protected void printEven() {
+		int evenNums = 0;
+		
+		for (int num : numList) {
+			if (num % 2 == 0) {
+				if (evenNums != 0) {
+					System.out.print(", ");
+				}
+				evenNums++;
+				System.out.print(num);
+			}
+		}
+		System.out.println();
 	}
 }
