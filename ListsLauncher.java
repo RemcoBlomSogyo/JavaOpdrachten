@@ -17,6 +17,7 @@ public class ListsLauncher {
 		tenIntArr.addingTwoLowest();
 		tenIntArr.printEven();
 		tenIntArr.fourLists();
+		tenIntArr.bubbleSort();
 	}
 }
 
@@ -134,16 +135,45 @@ class TenIntegerArray {
 			System.out.print("Remaining numbers: ");
 		}
 		
-		for (int i = 0; i < counter; i++) {
-			if (i != counter - 1) {
-				System.out.print(nums[i] + ", ");
-			} else {
-				System.out.println(nums[i]);
-			}
-		}
+		commaPrint(counter, nums);
 		
 		if (counter == 0) {
 			System.out.println();
+		}
+	}
+	
+	// sorting the list of numbers with bubble sort
+	protected void bubbleSort () {
+		int[] sortList = numList;
+		int sorts = 1;
+		
+		while (sorts != 0) {
+			sorts = 0;
+			for (int i = 0; i < listLength; i++) {
+				if (i == listLength - 1) {
+					break;
+				}
+				if (sortList[i] > sortList[i + 1]) {
+					int temp = sortList[i];
+					sortList[i] = sortList[i + 1];
+					sortList[i + 1] = temp;
+					sorts++;
+				}
+			}
+		}
+		
+		System.out.print("Bubble sort: ");
+		commaPrint(listLength, sortList);
+	}
+	
+	// printing numbers seperated by commas, for printList and bubbleSort
+	private void commaPrint (int arrLength, int[] numArray) {
+		for (int i = 0; i < arrLength; i++) {
+			if (i != arrLength - 1) {
+				System.out.print(numArray[i] + ", ");
+			} else {
+				System.out.println(numArray[i]);
+			}
 		}
 	}
 }
