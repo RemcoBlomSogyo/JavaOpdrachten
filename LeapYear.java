@@ -12,7 +12,7 @@ public class LeapYear {
 	
 	public static void main (String[] args) {
 		
-		// Ask user for input, check for input is number and is positive
+		// ask user for input, check for input is number and is positive
 		int getYear = -1;
 
 		while (getYear < 0) {
@@ -26,23 +26,15 @@ public class LeapYear {
 			}
 		}
 
-		// check for new century is dividible by 400
-		if (getYear % 100 == 0) {
-			if (getYear % 400 == 0) {
-				System.out.println("That year is a leap year!");
-			}
-			else {
-				System.out.println("That year is NOT a leap year!");
-			}
-			return;
-		}
-
-		// check if year is dividible by 4
-		if (getYear % 4 == 0) {
+		// check if year is a leap year
+		if (getYear % 400 == 0) {
 			System.out.println("That year is a leap year!");
-			return;
+		} else if (getYear % 100 == 0) {
+			System.out.println("That year is NOT a leap year!");
+		} else if (getYear % 4 == 0) {
+			System.out.println("That year is a leap year!");
+		} else {
+			System.out.println("That year is NOT a leap year!");
 		}
-
-		System.out.println("That year is NOT a leap year!");
 	}
 }
