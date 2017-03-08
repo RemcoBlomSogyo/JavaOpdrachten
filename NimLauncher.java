@@ -1,7 +1,7 @@
 /*
 	NimLauncher.java
 	
-	Made by Remco Blom
+	Made by Remco Blom 
 */
 
 import java.util.Scanner;
