@@ -39,12 +39,43 @@ public class Robot {
 		facing = face;
 	}
 	
+	public void printState() {
+		System.out.println("(" + getPosX() + "," 
+			+ getPosY() + "), " + getFacing());
+	}
+	
+	public void turnLeft() {
+		if (getFacing().equals("north")) {
+			setFacing("west");
+		} else if (getFacing().equals("east")) {
+			setFacing("north");
+		} else if (getFacing().equals("south")) {
+			setFacing("east");
+		} else {
+			setFacing("south");
+		}
+	}
+	
+	public void turnRight() {
+		if (getFacing().equals("north")) {
+			setFacing("east");
+		} else if (getFacing().equals("east")) {
+			setFacing("south");
+		} else if (getFacing().equals("south")) {
+			setFacing("west");
+		} else {
+			setFacing("north");
+		}
+	}
+	
 	public static void main(String[] args) {
 		Robot robin = new Robot(2, 4, "south");
 		Robot blitzCrank = new Robot(1, 2, "west");
-		System.out.println("Robin: (" + robin.getPosX() + "," 
-			+ robin.getPosY() + "), " + robin.getFacing());
-		System.out.println("Blitzcrank: (" + blitzCrank.getPosX() + "," 
-			+ blitzCrank.getPosY() + "), " + blitzCrank.getFacing());
+		robin.turnRight();
+		blitzCrank.turnLeft();
+		System.out.print("Robin: ");
+		robin.printState();
+		System.out.print("Blitzcrank: ");
+		blitzCrank.printState();
 	}
 }
