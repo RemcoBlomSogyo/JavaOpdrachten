@@ -68,11 +68,37 @@ public class Robot {
 		}
 	}
 	
+	public void forward() {
+		if (getFacing().equals("north")) {
+			setPosY(getPosY() + 1);
+		} else if (getFacing().equals("east")) {
+			setPosX(getPosX() + 1);
+		} else if (getFacing().equals("south")) {
+			setPosY(getPosY() - 1);
+		} else {
+			setPosX(getPosX() - 1);
+		}
+	}
+	
+	public void backward() {
+		if (getFacing().equals("north")) {
+			setPosY(getPosY() - 1);
+		} else if (getFacing().equals("east")) {
+			setPosX(getPosX() - 1);
+		} else if (getFacing().equals("south")) {
+			setPosY(getPosY() + 1);
+		} else {
+			setPosX(getPosX() + 1);
+		}
+	}
+	
 	public static void main(String[] args) {
 		Robot robin = new Robot(2, 4, "south");
 		Robot blitzCrank = new Robot(1, 2, "west");
 		robin.turnRight();
+		robin.forward();
 		blitzCrank.turnLeft();
+		blitzCrank.backward();
 		System.out.print("Robin: ");
 		robin.printState();
 		System.out.print("Blitzcrank: ");
