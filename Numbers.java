@@ -18,6 +18,45 @@ public class Numbers {
 			Index6 = Under Horizontal Line 
 		*/
 		switch (num) {
+			
+			// this represents the A in AM
+			case -2:
+			
+			if (index == 0) {
+				return true;
+			} else if (index == 1) {
+				return true;
+			} else if (index == 2) {
+				return true;
+			} else if (index == 3) {
+				return true;
+			} else if (index == 4) {
+				return true;
+			} else if (index == 5) {
+				return true;
+			} else {
+				return false;
+			} 	
+			
+			// this represents the P in PM
+			case -1:
+			
+			if (index == 0) {
+				return true;
+			} else if (index == 1) {
+				return true;
+			} else if (index == 2) {
+				return true;
+			} else if (index == 3) {
+				return true;
+			} else if (index == 4) {
+				return true;
+			} else if (index == 5) {
+				return false;
+			} else {
+				return false;
+			} 	
+			
 			case 0: 
 			
 			if (index == 0) {

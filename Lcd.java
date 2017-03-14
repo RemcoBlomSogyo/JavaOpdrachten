@@ -5,25 +5,35 @@
 */
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class Lcd {
 	
-	private int[]timeNums = new int[4];
+	private ArrayList<Integer> timeNums = new ArrayList<Integer>();
 	private int size = 1;
+	private boolean amPm = false;
 	private final boolean[] lineIsVert = {false, true, false, true, false};
 	
-	public void start(int newSize) {
+	public void start(int newSize, boolean newAmPm) {
 		size = newSize;
+		amPm = newAmPm;
 		getCurTime();
 		printLines();
 	}
 	
 	private void getCurTime() {
 		LocalTime time = LocalTime.now();
-		timeNums[0] = time.getHour() / 10;
-		timeNums[1] = time.getHour() % 10;
-		timeNums[2] = time.getMinute() / 10;
-		timeNums[3] = time.getMinute() % 10;
+		if (amPm) {
+			if (time.getHour() < 12) {
+				timeNums.add(-2);
+			} else {
+				timeNums.add(-1);
+			}
+		}
+		timeNums.add(time.getHour() / 10);
+		timeNums.add(time.getHour() % 10);
+		timeNums.add(time.getMinute() / 10);
+		timeNums.add(time.getMinute() % 10);
 	}
 	
 	private void printLines() {
@@ -41,7 +51,7 @@ public class Lcd {
 			while (printedLines != size) {
 				
 				//loop over time digits
-				for (int j = 0; j < timeNums.length; j++) {
+				for (int j = 0; j < timeNums.size(); j++) {
 					
 					// vertical parts of digit
 					if (lineIsVert[i]) {
@@ -50,7 +60,7 @@ public class Lcd {
 						if (i == 1) {
 							
 							// left part of digit
-							if (Numbers.getLine(timeNums[j], 1)) {
+							if (Numbers.getLine(timeNums.get(j), 1)) {
 								System.out.print("|");
 							} else {
 								System.out.print(" ");
@@ -60,7 +70,7 @@ public class Lcd {
 							printSpaces();
 							
 							// right part of digit
-							if (Numbers.getLine(timeNums[j], 2)) {
+							if (Numbers.getLine(timeNums.get(j), 2)) {
 								System.out.print("|");
 							} else {
 								System.out.print(" ");
@@ -70,7 +80,7 @@ public class Lcd {
 						} else {
 							
 							// left part of digit
-							if (Numbers.getLine(timeNums[j], 4)) {
+							if (Numbers.getLine(timeNums.get(j), 4)) {
 								System.out.print("|");
 							} else {
 								System.out.print(" ");
@@ -80,7 +90,7 @@ public class Lcd {
 							printSpaces();
 							
 							// right part of digit
-							if (Numbers.getLine(timeNums[j], 5)) {
+							if (Numbers.getLine(timeNums.get(j), 5)) {
 								System.out.print("|");
 							} else {
 								System.out.print(" ");
@@ -90,7 +100,7 @@ public class Lcd {
 						printSpaceNoNum(j);
 
 						// print dots in the middle of time notation
-						if (j == 1) {
+						if ((!amPm && j == 1) || (amPm && j == 2)) {
 							printDots();
 							printSpaceNoNum(j);
 						}
@@ -104,19 +114,19 @@ public class Lcd {
 						// middle part of digit
 						for (int k = 0; k < size; k++) {
 							if (i == 0) {
-								if (Numbers.getLine(timeNums[j], 0)) {
+								if (Numbers.getLine(timeNums.get(j), 0)) {
 									System.out.print("-");
 								} else {
 									System.out.print(" ");
 								}
 							} else if (i == 2) {
-								if (Numbers.getLine(timeNums[j], 3)) {
+								if (Numbers.getLine(timeNums.get(j), 3)) {
 									System.out.print("-");
 								} else {
 									System.out.print(" ");
 								}
 							} else {
-								if (Numbers.getLine(timeNums[j], 6)) {
+								if (Numbers.getLine(timeNums.get(j), 6)) {
 									System.out.print("-");
 								} else {
 									System.out.print(" ");
@@ -129,7 +139,7 @@ public class Lcd {
 						
 						printSpaceNoNum(j);
 						
-						if (j == 1) {
+						if ((!amPm && j == 1) || (amPm && j == 2)) {
 							printSpaces();
 							printSpaceNoNum(j);
 						}
@@ -142,7 +152,7 @@ public class Lcd {
 		}
 	}
 	
-	// printDots
+	// print dots between the second and third digit
 	private void printDots() {
 		for (int i = 0; i < size; i++) {
 			System.out.print("-");
