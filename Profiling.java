@@ -91,14 +91,14 @@ public class Profiling {
 	}
 	
 	public void searchForNames(String input) {
-		int foundNames = 0;
+		//int foundNames = 0;
 		for (Profile profile : profiles) {
 			if (profile.getBookTitles().contains(input)) {
-				if (foundNames != 0) {
-					System.out.print(", ");
-				}
-				System.out.print(profile.getName());
-				foundNames++;
+				//if (foundNames != 0) {
+				//	System.out.print(", ");
+				//}
+				System.out.println(profile.getName());
+				//foundNames++;
 			}
 		}
 	}
