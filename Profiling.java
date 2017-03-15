@@ -33,7 +33,8 @@ public class Profiling {
 			System.out.println("File not found");
 		}
 		
-		askName();
+		//askName();
+		askBook();
 	}
 
 	public void askName() {
@@ -46,6 +47,14 @@ public class Profiling {
 		} else {
 			checkPartial(userInput);
 		}
+	}
+	
+	public void askBook() {
+		System.out.print("Name of book: ");
+		Scanner scan = new Scanner(System.in);
+		String userInput = scan.nextLine();
+		
+		searchForNames(userInput);
 	}
 	
 	public void checkFullName(String input) {
@@ -77,6 +86,19 @@ public class Profiling {
 			System.out.print(bookTitles.get(i));
 			if (i != bookTitles.size() - 1) {
 				System.out.print(", ");
+			}
+		}
+	}
+	
+	public void searchForNames(String input) {
+		int foundNames = 0;
+		for (Profile profile : profiles) {
+			if (profile.getBookTitles().contains(input)) {
+				if (foundNames != 0) {
+					System.out.print(", ");
+				}
+				System.out.print(profile.getName());
+				foundNames++;
 			}
 		}
 	}
