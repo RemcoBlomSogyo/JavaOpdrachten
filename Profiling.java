@@ -23,7 +23,7 @@ public class Profiling {
 				String line = scan.nextLine();
 				List<String> lineParts = Arrays.asList(line.split(", "));
 				profiles.add(new Profile());
-				profiles.get(profiles.size() - 1).setName(lineParts.get(0));
+				profiles.get(profiles.size() - 1).setName(lineParts.get(0).replace("  ", " "));
 				
 				for (int i = 1; i < lineParts.size(); i++) {
 					profiles.get(profiles.size() - 1).addBook(lineParts.get(i));
@@ -33,8 +33,29 @@ public class Profiling {
 			System.out.println("File not found");
 		}
 		
-		for (Profile profile : profiles) {
+		/*for (Profile profile : profiles) {
 			System.out.println(profile.getName());
+		}*/
+		askName();
+	}
+
+	public void askName() {
+		System.out.print("Name of customer: ");
+		Scanner scan = new Scanner(System.in);
+		String userInput = scan.nextLine();
+		
+		for (Profile profile : profiles) {
+			if (profile.getName().equals(userInput)) {
+				ArrayList<String> bookTitles = profile.getBookTitles();
+				for (int i = 0; i < bookTitles.size(); i++) {
+					System.out.print(bookTitles.get(i));
+					if (i != bookTitles.size() - 1) {
+						System.out.print(", ");
+					}
+				}
+				return;
+			}
 		}
-	}	
+		System.out.println("Customer doesn't exist");
+	}
 }

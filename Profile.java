@@ -15,4 +15,8 @@ public class Profile {
 	public String getName() {
 		return name;
 	}
+	
+	public ArrayList<String> getBookTitles() {
+		return bookTitles;
+	}
 }
