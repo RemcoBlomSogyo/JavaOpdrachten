@@ -33,9 +33,6 @@ public class Profiling {
 			System.out.println("File not found");
 		}
 		
-		/*for (Profile profile : profiles) {
-			System.out.println(profile.getName());
-		}*/
 		askName();
 	}
 
@@ -44,18 +41,43 @@ public class Profiling {
 		Scanner scan = new Scanner(System.in);
 		String userInput = scan.nextLine();
 		
+		if (userInput.contains(" ")) {
+			checkFullName(userInput);
+		} else {
+			checkPartial(userInput);
+		}
+	}
+	
+	public void checkFullName(String input) {
+		
 		for (Profile profile : profiles) {
-			if (profile.getName().equals(userInput)) {
-				ArrayList<String> bookTitles = profile.getBookTitles();
-				for (int i = 0; i < bookTitles.size(); i++) {
-					System.out.print(bookTitles.get(i));
-					if (i != bookTitles.size() - 1) {
-						System.out.print(", ");
-					}
-				}
+			if (profile.getName().equals(input)) {
+				printBooks(profile);
 				return;
 			}
 		}
 		System.out.println("Customer doesn't exist");
+	}
+	
+	public void checkPartial(String input) {
+	
+		for (Profile profile : profiles) {
+			if (profile.getName().toLowerCase().contains(input.toLowerCase())) {
+				System.out.print(profile.getName() + ": ");
+				printBooks(profile);
+				return;
+			}
+		}
+		System.out.println("No customer found");
+	}
+	
+	private void printBooks(Profile profile) {
+		ArrayList<String> bookTitles = profile.getBookTitles();
+		for (int i = 0; i < bookTitles.size(); i++) {
+			System.out.print(bookTitles.get(i));
+			if (i != bookTitles.size() - 1) {
+				System.out.print(", ");
+			}
+		}
 	}
 }
