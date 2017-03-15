@@ -1,3 +1,9 @@
+/*
+	Profile.java
+	
+	Made by Remco Blom
+*/
+
 import java.util.ArrayList;
 
 public class Profile {

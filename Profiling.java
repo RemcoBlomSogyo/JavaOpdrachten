@@ -1,5 +1,7 @@
 /*
 	Profiling.java
+	
+	Made by Remco Blom
 */
 
 import java.util.Scanner;
@@ -13,6 +15,7 @@ public class Profiling {
 	
 	ArrayList<Profile> profiles = new ArrayList<Profile>();
 	
+	// reads txt file and converts into profiles
 	public void inputFile() {
 		File file = new File("profiling-data.txt");
 		
@@ -33,11 +36,12 @@ public class Profiling {
 			System.out.println("File not found");
 		}
 		
-		//askName();
-		askBook();
+		askName();
+		//askBook();
 	}
 
-	public void askName() {
+	// asks name as input to user
+	private void askName() {
 		System.out.print("Name of customer: ");
 		Scanner scan = new Scanner(System.in);
 		String userInput = scan.nextLine();
@@ -49,7 +53,8 @@ public class Profiling {
 		}
 	}
 	
-	public void askBook() {
+	// asks book title as input to user
+	private void askBook() {
 		System.out.print("Name of book: ");
 		Scanner scan = new Scanner(System.in);
 		String userInput = scan.nextLine();
@@ -57,29 +62,32 @@ public class Profiling {
 		searchForNames(userInput);
 	}
 	
-	public void checkFullName(String input) {
-		
+	// checks if the full name is in the list of profiles
+	private void checkFullName(String input) {
 		for (Profile profile : profiles) {
 			if (profile.getName().equals(input)) {
-				printBooks(profile);
+				//printBooks(profile);
+				recommendBook(profile);
 				return;
 			}
 		}
 		System.out.println("Customer doesn't exist");
 	}
 	
-	public void checkPartial(String input) {
-	
+	// checks if the input is in the name of a customer
+	private void checkPartial(String input) {
 		for (Profile profile : profiles) {
 			if (profile.getName().toLowerCase().contains(input.toLowerCase())) {
 				System.out.print(profile.getName() + ": ");
-				printBooks(profile);
+				//printBooks(profile);
+				recommendBook(profile);
 				return;
 			}
 		}
 		System.out.println("No customer found");
 	}
 	
+	// prints all sold book titles of a customer
 	private void printBooks(Profile profile) {
 		ArrayList<String> bookTitles = profile.getBookTitles();
 		for (int i = 0; i < bookTitles.size(); i++) {
@@ -90,16 +98,37 @@ public class Profiling {
 		}
 	}
 	
-	public void searchForNames(String input) {
-		//int foundNames = 0;
+	// prints all names of customers that bought a specific book
+	private void searchForNames(String input) {
 		for (Profile profile : profiles) {
 			if (profile.getBookTitles().contains(input)) {
-				//if (foundNames != 0) {
-				//	System.out.print(", ");
-				//}
 				System.out.println(profile.getName());
-				//foundNames++;
+				return;
 			}
 		}
+		System.out.println("This book hasn't been sold");
+	}
+	
+	// gives a recommendation to a customer based on similarities with an other customer
+	private void recommendBook(Profile inputProf) {
+		ArrayList<String> inputTitles = inputProf.getBookTitles();
+		for (Profile compareProf : profiles) {
+			ArrayList<String> compareTitles = compareProf.getBookTitles();
+			ArrayList<String> matchTitles = new ArrayList<String>();
+			for (String inputTitle : inputTitles) {
+				if (compareTitles.contains(inputTitle)) {
+					matchTitles.add(inputTitle);
+				}
+			}
+			if (matchTitles.size() >= 3 && matchTitles.size() != compareTitles.size()) {
+				for (String compareTitle : compareTitles) {
+					if (!matchTitles.contains(compareTitle)) {
+						System.out.println(compareTitle);
+						return;
+					}
+				}
+			}
+		}
+		System.out.println("No recommendations");
 	}
 }
