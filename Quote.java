@@ -1,50 +1,18 @@
 /*
 	Quote.java
 	
+	Gets the right quote and name based on current date 
+	and prints it to the terminal.
+	
 	Made by Remco Blom
 */
 
 import java.time.LocalDate;
 
-/*
-	Holds the six quotes and names and launches the progam
-*/
 public class Quote {
-    private String[][] quotes = {
-        {"galileo", "eppur si muove"},
-        {"archimedes", "eureka!"},
-        {"erasmus", "in regione caecorum rex est luscus"},
-        {"socrates", "I know nothing except the fact of my ignorance"},
-        {"rené descartes", "cogito, ergo sum"},
-        {"sir isaac newton", "if I have seen further it is by standing on the shoulders of giants"}
-    };
-	
-	public String getSentence(int index) {
-		return quotes[index][1];
-	}
-
-	public String getName(int index) {
-		return quotes[index][0];
-	}
-	
-    public static void main(String... args) {
-        QuotePrinter printer = new QuotePrinter();
-		printer.printToPromt();
-    }
-}
-
-/*
-	Gets the right quote and name based on current date 
-	and prints it to the terminal
-*/
-class QuotePrinter {
 	private int dayIndex;
 	private String sentence;
 	private String name;
-	
-	public int getDayIndex() {
-		return dayIndex;
-	}
 	
 	public void setDayIndex(int index) {
 		dayIndex = index;
@@ -67,16 +35,16 @@ class QuotePrinter {
 	}
 	
 	// gets current date and convert it into an index for the quote array
-	public void calcDayIndex() {
+	public void calculateDayIndex() {
 		LocalDate date = LocalDate.now();
 		setDayIndex(date.getDayOfYear() % 6);
 	}
 	
 	// gets the quote from the other class
 	public void chooseQuote() {
-		Quote quote = new Quote();
-		setSentence(quote.getSentence(dayIndex));
-		setName(quote.getName(dayIndex)); 
+		QuoteLauncher launcher = new QuoteLauncher();
+		setSentence(launcher.getSentence(dayIndex));
+		setName(launcher.getName(dayIndex)); 
 	}
 
 	// makes first char of string a capital letter
@@ -104,7 +72,7 @@ class QuotePrinter {
 
 	// calls other methods and prints to terminal
 	public void printToPromt() {
-		calcDayIndex();
+		calculateDayIndex();
 		chooseQuote();
 		setName(capitalize(getName()));
 		setSentence(addQuotes(addDot(capitalize(getSentence()))));
