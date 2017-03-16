@@ -76,7 +76,23 @@ public class Robot {
 	public void execute() {
 		ArrayList<String> robotCommands = getCommands();
 		for (String command : robotCommands) {
-			if (command.equals("left")) {
+			switch (command) {
+				case "left": 	
+					turnLeft();
+					break;
+					
+				case "right":
+					turnRight();
+					break;
+					
+				case "backward":
+					backward();
+					break;
+					
+				default: 
+					forward(Integer.parseInt(command.substring(7)));
+			}
+			/*if (command.equals("left")) {
 				turnLeft();
 			} else if (command.equals("right")) {
 				turnRight();
@@ -84,7 +100,7 @@ public class Robot {
 				forward(Integer.parseInt(command.substring(7)));
 			} else {
 				backward();
-			}
+			}*/
 		}
 	}
 	
