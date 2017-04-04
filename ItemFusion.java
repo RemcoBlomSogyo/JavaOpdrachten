@@ -47,6 +47,30 @@ public class ItemFusion {
 			System.out.println("File not found");
 		}		
 	}
+	
+	private void getUserInput() {
+		boolean validInput = false;
+		while (!validInput) {
+			Scanner scan = new Scanner(System.in);
+			String input = scan.nextLine();
+			for (int i = 0; i < items.size(); i++) {
+				if (items.get(i).get(0).equals(input)) {
+					findCheapestway(input);
+					return;
+				}
+			}
+			for (int i = 0; i < fusions.size(); i++) {
+				if (fusions.get(i).get(2).equals(input)) {
+					findCheapestway(input);
+					return;
+				}
+			}
+		}
+	}
+	
+	private void findCheapestway (String item) {
+		
+	}
 
 /*
 	Find cheapest way to get item
